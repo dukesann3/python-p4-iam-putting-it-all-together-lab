@@ -1,5 +1,6 @@
 import pytest
 from sqlalchemy.exc import IntegrityError
+import ipdb
 
 from app import app
 from models import db, Recipe
@@ -63,12 +64,10 @@ class TestRecipe:
 
             Recipe.query.delete()
             db.session.commit()
-
-            recipe = Recipe(
-                title="Generic Ham",
-                instructions="idk lol")
-
-            with pytest.raises(IntegrityError):
-                db.session.add(recipe)
-                db.session.commit()
+ 
+            with pytest.raises(AttributeError):
+                Recipe(
+                    title="Generic Ham",
+                    instructions="idk lol"
+                )
 

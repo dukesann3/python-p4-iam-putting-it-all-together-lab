@@ -6,6 +6,7 @@ from faker import Faker
 
 from app import app
 from models import db, Recipe, User
+import ipdb
 
 fake = Faker()
 
@@ -24,7 +25,7 @@ with app.app_context():
     usernames = []
 
     for i in range(20):
-        
+
         username = fake.first_name()
         while username in usernames:
             username = fake.first_name()
@@ -37,7 +38,6 @@ with app.app_context():
         )
 
         user.password_hash = user.username + 'password'
-
         users.append(user)
 
     db.session.add_all(users)
